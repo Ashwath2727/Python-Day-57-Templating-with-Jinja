@@ -2,6 +2,7 @@ import datetime
 import random
 
 from age_calculator import AgeCalculator
+from blogs import Blogs
 from gender import Gender
 
 from flask import Flask, render_template
@@ -25,6 +26,15 @@ def guess(name):
     age = age_calculator.get_age()
 
     return render_template("guess.html", name=name.title(), gender=gender_reveal, age=age)
+
+@app.route("/blog/<num>")
+def get_blog(num):
+    print(num)
+    blogs = Blogs()
+    all_posts = blogs.get_posts()
+
+    return render_template("blog.html", posts=all_posts)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
